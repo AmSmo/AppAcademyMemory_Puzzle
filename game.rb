@@ -17,6 +17,9 @@ class Game
         until won?
             play_round
         end
+        puts "You found them all CONGRATS!!"
+        puts "It took you #{turns} turns"
+        @board.display_board
     end
 
     def won?
@@ -56,7 +59,6 @@ class Game
         exit if response == 'exit'
         if valid_guess?(response)
             current_guess = valid_guess?(response)
-            # binding.pry
             @board[current_guess].reveal
         else
             puts "Try that again"
