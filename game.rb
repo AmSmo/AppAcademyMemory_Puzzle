@@ -33,13 +33,16 @@ class Game
         first_guess = guess
         @board.display_board 
         second_guess = guess
-        
+
         if first_guess.value == second_guess.value
             puts "You got a match!"
             @found+=1
-            display_board
+            
         else
             puts "Not a match"
+            @board.display_board
+            sleep(2)
+            system("clear")
             first_guess.hide
             second_guess.hide
         end
@@ -50,6 +53,7 @@ class Game
     def guess
         puts "Please choose a card e.g. 0, 0"
         response = gets.chomp
+        exit if response == 'exit'
         if valid_guess?(response)
             current_guess = valid_guess?(response)
             # binding.pry
@@ -77,7 +81,7 @@ class Game
     def previously_guessed?(end_array)
         if @board[end_array].face_up
             puts "You have already guessed that card"
-            return true
+            return false
         else
             return end_array
         end
